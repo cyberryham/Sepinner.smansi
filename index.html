@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi dan Pembagian Kelompok Siswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 5px 5px 10px black;
+            text-align: center;
+            background-color: #b2d7db;
+            border: 1px solid black;
+            
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        select, input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3e7;
+            border: 1px solid #d6e9c6;
+            border-radius: 5px;
+            display: none;
+        }
+        .absensi {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .nama-siswa {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .kelompok {
+            margin-bottom: 15px;
+        }
+        .spinner {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .navigation {
+            display: inline-block;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .bar1, .bar2, .bar3 {
+            background-color: black;
+            width: 30px;
+            height: 5px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .menuaa {
+            display: none;
+            background-color: black;
+            color: #fff;
+            padding: 10px;
+            width: 190px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px black;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+            display: block;
+        }
+        .show {
+            display: block;
+        }
+        ul{
+          list-style-type: none;
+        }
+        .container img{
+          width: 80px;
+          border-radius: 20px;
+          box-shadow: 5px 10px 5px black;
+          border: 1px solid black;
+        }
+        .container img:hover{
+          transition: 0.6s;
+          width: 85px;
+          border-radius: 20px;
+          box-shadow: 5px 10px 5px black;
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navigation" id="navigation">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+</div>
+<div>
+    <ul class="menuaa" id="menusepiner">
+        <li><a href="index2.html">Absensi Siswa</a></li>
+        <hr><li><a href="index1.html">Pembagian Kelompok manual</a></li><hr>
+    </ul>
+</div>
+
+<div class="container">
+  <img src="https://i.ibb.co.com/0tGBvXS/IMG-20241014-WA0000.jpg">
+    <h2>SMAN 1 SINDANGBARANG</h2>
+    <h3>Pembagian Kelompok Siswa</h3>
+
+    <div class="form-group">
+        <label for="kelas">Pilih Kelas</label>
+        <select id="kelas" onchange="tampilkanAbsensi()">
+            <option value="X">Kelas X</option>
+            <option value="XI">Kelas XI</option>
+            <option value="XII">Kelas XII</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ruang">Pilih Ruang Kelas</label>
+        <select id="ruang" onchange="tampilkanAbsensi()">
+            <option value="A">Ruang A</option>
+            <option value="B">Ruang B</option>
+            <option value="C">Ruang C</option>
+            <option value="D">Ruang D</option>
+            <option value="E">Ruang E</option>
+            <option value="F">Ruang F</option>
+            <option value="G">Ruang G</option>
+            <option value="H">Ruang H</option>
+            <option value="I">Ruang I</option>
+        </select>
+    </div>
+
+    <div id="absensi" class="absensi"></div>
+
+    <div class="form-group">
+        <label for="jumlahKelompok">Jumlah Kelompok</label>
+        <input type="number" id="jumlahKelompok" min="1" placeholder="Masukkan jumlah kelompok">
+    </div>
+
+    <button onclick="bagiKelompok()">Bagi Kelompok Secara Acak</button>
+
+    <!-- Spinner loading animation -->
+    <div class="spinner" id="spinner"></div>
+
+    <div class="result" id="result"></div>
+</div>
+<div>m.hamzah</div>
+<script>
+  // Fungsi untuk menampilkan atau menyembunyikan menu saat tombol navigasi diklik
+document.getElementById("navigation").addEventListener("click", function() {
+    var menu = document.getElementById("menusepiner");
+    menu.classList.toggle("show"); // Toggle kelas 'show' untuk menampilkan atau menyembunyikan menu
+});
+
+// Data absensi siswa
+const dataSiswa = {
+    "X": {
+        "A": [
+            "AIRA ASVIA ZAHRA",
+            "ANISA KANIA DEWI",
+            "AZHAR FACHMI ROMADON",
+            "DANDI KUSNADI",
+            "DILA ARTILA",
+            "ELKA PRAJA SETIADI",
+            "ELVIRA RAHMAWATI",
+            "ENENG SITI TASYA ULIA",
+            "FAHMI HIPDILAH",
+            "GITA PURNAMA IDAMAN",
+            "HENDARSAH",
+            "M RAMDHANI",
+            "M. KHUSNI MUBAROK",
+            "M. MUSTOPANABIL",
+            "MAISYA PUTRI MAHARANI",
+            "MAULYDHA KHAZANAH SUDIRMAN",
+            "MELISSA RAMADHANI",
+            "MUHAMAD ADILA CAHYANA",
+            "MUHAMAD REJA",
+            "MUHAMMAD FAHRI IRFANI",
+            "MUHAMMAD NURMAN MAULANA",
+            "NEYLA CANDIA",
+            "NUR AJMI SRI WAHYUNI",
+            "QINTHARA KIRANI SASTI",
+            "REHAN ALPIANSYAH",
+            "ROSA AMELIYAH",
+            "SAHRIL MUBAROK",
+            "SALFA RAHMALIA",
+            "SALWA HANIFA",
+            "SAPA RAMDANI",
+            "SATRIO",
+            "SILVI OLIA PUTRI",
+            "SRI KURNIAWATI",
+            "ZIDANE",
+            "MOCH RAJIB TRI GUSTIAWAN"
+        ]
+    },
+    "XI": {
+        "A": ["hamzah",
+        "hamxacsf"],
+        "B": [],
+        "C": [],
+        "D": [],
+        "E": [],
+        "F": [],
+        "G": [],
+        "H": []
+    },
+    "XII": {
+        "A": [],
+        "B": [],
+        "C": [],
+        "D": [],
+        "E": [],
+        "F": [],
+        "G": [],
+        "H": [],
+        "I": [
+          "",
+          "&&-::",
+          "",
+          ""
+          ]
+    }
+};
+
+// Menampilkan absensi siswa
+function tampilkanAbsensi() {
+    let kelas = document.getElementById('kelas').value;
+    let ruang = document.getElementById('ruang').value;
+    let absensiDiv = document.getElementById('absensi');
+
+    if (dataSiswa[kelas] && dataSiswa[kelas][ruang]) {
+        let siswaList = dataSiswa[kelas][ruang].map(siswa => `<span class="nama-siswa">${siswa}</span>`).join(' ');
+        absensiDiv.innerHTML = `<h3>Absensi Siswa di Kelas ${kelas} Ruang ${ruang}:</h3><p>${siswaList}</p>`;
+    } else {
+        absensiDiv.innerHTML = `<p>Tidak ada data siswa untuk Kelas ${kelas} Ruang ${ruang}.</p>`;
+    }
+}
+
+// Fungsi untuk mengacak array
+function acakArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Fungsi untuk membagi kelompok secara acak
+function bagiKelompok() {
+    let kelas = document.getElementById('kelas').value;
+    let ruang = document.getElementById('ruang').value;
+    let jumlahKelompok = parseInt(document.getElementById('jumlahKelompok').value);
+
+    // Memunculkan spinner selama proses pembagian kelompok
+    let spinner = document.getElementById('spinner');
+    spinner.style.display = 'block';
+
+    if (dataSiswa[kelas] && dataSiswa[kelas][ruang] && jumlahKelompok > 0) {
+        let siswaList = dataSiswa[kelas][ruang];
+        let siswaTeracak = acakArray([...siswaList]); // Mengacak siswa
+        let kelompok = [];
+
+        // Membagi siswa ke dalam kelompok-kelompok
+        for (let i = 0; i < jumlahKelompok; i++) {
+            kelompok[i] = [];
+        }
+
+        for (let i = 0; i < siswaTeracak.length; i++) {
+            kelompok[i % jumlahKelompok].push(siswaTeracak[i]);
+        }
+
+        // Menampilkan hasil pembagian kelompok
+        setTimeout(function() {
+            let resultDiv = document.getElementById('result');
+            let resultHTML = '';
+
+            for (let i = 0; i < kelompok.length; i++) {
+                resultHTML += `<div class="kelompok"><h4>Kelompok ${i + 1}:</h4><ul>`;
+                kelompok[i].forEach(siswa => {
+                    resultHTML += `<li>${siswa}</li>`; // Menampilkan setiap siswa dalam <li>
+                });
+                resultHTML += `</ul></div>`;
+            }
+
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.style.display = 'block';
+            spinner.style.display = 'none'; // Sembunyikan spinner setelah pembagian selesai
+        }, 1000); // Simulasi loading selama 1 detik
+    } else {
+        spinner.style.display = 'none';
+        alert('Mohon masukkan jumlah kelompok yang valid dan pilih kelas serta ruang yang sesuai.');
+    }
+}
+</script>
+
+</body>
+</html>

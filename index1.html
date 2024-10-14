@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinner Nama, kelompok</title>
+    <style>
+    /*   Tiktok: m.hamzah_7
+         ig    : @wellhamz7
+         wa    : 085724385372
+    */
+        body {
+            font-family: 'Arial', sans-serif;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://i.ibb.co.com/tJ8VFkV/IMG-20240925-WA0005.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; 
+            margin: 0;
+            display: flex;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        .selected {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+            border: 2px solid #e74c3c;
+            padding: 10px;
+            border-radius: 5px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-bottom: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #c61212;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 100px;
+            overflow-y: auto;
+            
+        }
+
+        li {
+            background: #f00d0d;
+            color: white;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .container a {
+          background-color: #515151;
+          color: #fff;
+          border: 1px solid black;
+          border-radius: 5px;
+          padding: 3px;
+          left: 15px;
+          top: 15px;
+          position: absolute;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+  <div class="lopp">
+    
+  <div class="imagelogo">
+  </div>
+    <div class="container">
+        <h1>Spinner Nama, & kelompok</h1>
+        <div id="selectedName" class="selected">Nama Terpilih</div>
+        <div id="loader" class="loader"></div>
+        <input type="text" id="nameInput" placeholder="Masukkan nama">
+        <button onclick="addName()">Tambah Nama</button>
+        <button onclick="spin()">Undi Sekarang</button>
+        <ul id="nameList"></ul>
+        <a href="index.html">kembali</a>
+    </div>
+  </div>
+  <div><p>
+    
+  </p></div>
+    <script>
+        const names = [];
+
+        function addName() {
+            const input = document.getElementById("nameInput");
+            const name = input.value.trim();
+            if (name) {
+                names.push(name);
+                input.value = '';
+                displayNames();
+            }
+        }
+
+        function displayNames() {
+            const nameList = document.getElementById("nameList");
+            nameList.innerHTML = '';
+            names.forEach((name) => {
+                const li = document.createElement("li");
+                li.textContent = name;
+                nameList.appendChild(li);
+            });
+        }
+
+        function spin() {
+            if (names.length > 0) {
+                const loader = document.getElementById("loader");
+                const selectedNameDiv = document.getElementById("selectedName");
+  loader.style.display = "block";
+  selectedNameDiv.textContent = '';
+   setTimeout(() => {
+     const randomIndex = Math.floor(Math.random() * names.length);
+   const selectedName = names[randomIndex];
+  document.getElementById("selectedName").textContent = selectedName;          names.splice(randomIndex, 1);
+      displayNames();
+   loader.style.display = "none";
+    }, 1000);
+            } else {
+   alert("Tidak ada nama yang tersedia untuk diundi. klik tombol Tambah nama");
+            }
+        }
+    </script>
+</body>
+</html>

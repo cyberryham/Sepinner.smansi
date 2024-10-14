@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinner Siswa sman 1 sindangbarang </title>
+    <link rel="stylesheet" href="stye.css">
+    <style>
+          *{
+      margin: 0px;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0c9ce2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .menu8{
+          background-color: #0c9ce2;
+          height: 500px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        p{
+          text-align: center;
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #4cae4c;
+        }
+        #selectedStudent {
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .kelompok a{
+          top: 5px;
+          left: 10px;
+          position: fixed;
+          background-color: #818485;
+          padding: 3px;
+          border-radius: 3px ;
+          color: #fff;
+          border:1px solid black;
+        }
+        .kelompok a:hover{
+          background-color:#10f84c;
+          color:black;
+          transition:0.1s;
+        }
+        #students {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #e90a0a;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .namai p{
+          text-align:center;
+        }
+        .namasiswa{
+          background-color:#14744b ;
+          color: #fff;
+          padding: 15px;
+          margin: 5px 5px 5px;
+          border-radius: 8px;
+          border: 2px solid black;
+        }
+        .hamzah{
+          background-color: #8a8787;
+          padding: 5px;
+          border-radius: 5px;
+          border: 1px solid black;
+        }
+      
+        .putar{
+          background-color: red;
+        }
+        .navigation{
+          background-color: blue;
+          padding: 5px;
+          text-align: center;
+          color: #fff;
+          border-radius: 5px;
+          border: 1px solid black;
+        }
+        .navigation img{
+          width: 20%;
+          border-radius: 20%;
+        }
+        .navigation img:hover{
+          transition: 1s;
+          width: 30%;
+          border-radius: 30%;
+        }
+        .terpilih{
+          text-align: center;
+          padding: 5px;
+        }
+        
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #000;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+    </style>
+    
+    
+    
+    <!-- Tiktok: m.hamzah_7
+         ig    : @wellhamz7
+         wa    : 085724385372
+    -->
+</head>
+<body>
+  <!--duh teing ku nn otak teh css ari komen ajang css teh kumaha poho aduhh css teh ibarat kulit atawa panon atawa buuk mun dina tubuh manusia teh-->
+  
+  
+  <!--iyeteh lamun dina tubuh manu sia teh ibarat tulang atawa rangka nya eta html-->
+  <nav class="navigation">
+    <h2>SMAN 1 SINDANGBARANG</h2>
+    <img src="https://i.ibb.co.com/LNrBnvF/IMG-20240925-WA0006.jpg">
+  </nav>
+  <div class="hamzah">
+    
+    <h1>Spinner Siswa</h1>
+  </div>
+    <div class="terpilih"><h4>Nama Siswa Terpilih <br>👇🏻👇🏻</h4></div>
+    <div id="selectedStudent" class="namasiswa"> <span id="selectedName"><br></span></div>
+    <hr>
+    <hr>
+    <label for="class">Pilih Kelas:</label>
+    <select id="class" onchange="updateRooms()">
+      
+        <option value="">--Pilih Kelas--</option>
+        <option value="X">kls- X</option>
+        <option value="XI">kls- XI</option>
+        <option value="XII">kls- XII</option>
+        <option value="kelompo">kelompok</option>
+    </select>
+    <br>
+    <label for="room">Pilih Ruang Kelas:</label>
+    <select id="room" onchange="updateStudents()">
+        <option value="">--Pilih Ruang Kelas--</option>
+        
+        
+        <!-- sedikit kata kata hidup itu harus kuat 
+        
+        1.jangan sombong
+        2.jangan 
+        3. jangan dar maji ingat gusti alloh maha melihat
+        4. jangan sok soan pintar kalou masih sok merendah kan orang Kelan 
+        5.kalou tugas saling menironkan kata saya ini mah kan berbagi itu indah 
+        6.pinjem dulu seratus-->
+        
+        
+        
+    </select><hr><hr>
+    <br>
+    <button class="putar" id="spinButton" onclick="spin()" disabled>Putar Spinner</button>
+    
+    <div id="students"></div>
+<div class="kelompok">
+  <a href="index.html">kembali</a>
+</div><div class="namai">
+  <p>Spinner khusus untuk <u>SMAN 1 SINDANGBARANG</u><br>karena sudah di sediakan nama nama siswa, <br>dan tidak bisa di ubah  </p>
+  <hr>
+  <p>kalow mau Spinner <u>KLMPOK</u> ada di bagian atas, pojok kiri atas</p><br><p>untul nama nama nya sesuai dengan absen siswa</p>
+</div>
+<div class="menu8">
+  
+</div>
+<div>
+  <p>lebih baik di anggap bodoh, tapi tau cara memanusiaan manusia, dari pada di anggap pintar, tapi selalu merendahkan orang lain dan menganggap dirinya paling tinggi</p>
+</div>
+    <script>
+        const originalStudents = {
+          
+          //untuk nama nama siswa nya seseai dengan absen di website SMAN 1 SINDANGBARANG
+          
+      //   Tiktok: m.hamzah_7
+      //  ig    : @wellhamz7
+      //  wa    : 085724385372
+    
+          
+          
+          // iyeteh kls X kelas nu welll
+  X: {
+     A: [
+     { name: "AIRA ASVIA ZAHRA", gender: "A" },
+     { name: "ANISA KANIA DEWI", gender: "A" },
+     { name: "AZHAR FACHMI ROMADON", gender: "A" },
+     { name: "DANDI KUSNADI", gender: "A" },
+     { name: "DILA ARTILA", gender: "A" },
+     { name: "ELKA PRAJA SETIADI", gender: "A" },
+     { name: "ELVIRA RAHMAWATI", gender: "A" },
+     { name: "ENENG SITI TASYA ULIA", gender: "A" },
+     { name: "FAHMI HIPDILAH", gender: "A" },
+     { name: "GITA PURNAMA IDAMAN", gender: "A" },
+     { name: "HENDARSAH", gender: "A" },
+     { name: "M RAMDHANI", gender: "A" },
+     { name: "M. KHUSNI MUBAROK", gender: "A" },
+     { name: "M. MUSTOPANABIL", gender: "A" },
+     { name: "MAISYA PUTRI MAHARANI", gender: "A" },
+     { name: "MAULYDHA KHAZANAH SUDIRMAN", gender: "A" },
+     { name: "MELISSA RAMADHANI", gender: "A" },
+     { name: "MUHAMAD ADILA CAHYANA", gender: "A" },
+     { name: "MUHAMAD REJA", gender: "A" },
+     { name: "MUHAMMAD FAHRI IRFANI", gender: "A" },
+     { name: "MUHAMMAD NURMAN MAULANA", gender: "A" },
+     { name: "NEYLA CANDIA", gender: "A" },
+     { name: "NUR AJMI SRI WAHYUNI", gender: "A" },
+     { name: "QINTHARA KIRANI SASTI", gender: "A" },
+     { name: "REHAN ALPIANSYAH", gender: "A" },
+     { name: "ROSA AMELIYAH", gender: "A" },
+     { name: "SAHRIL MUBAROK", gender: "A" },
+     { name: "SALFA RAHMALIA", gender: "A" },
+     { name: "SALWA HANIFA", gender: "A" },
+     { name: "SAPA RAMDANI", gender: "A" },
+     { name: "SATRIO", gender: "A" },
+     { name: "SILVI OLIA PUTRI", gender: "A" },
+     { name: "SRI KURNIAWATI", gender: "A" },
+     { name: "ZIDANE", gender: "A" },
+     { name: "MOCH RAJIB TRI GUSTIAWAN", gender: "A" },
+        ],
+     B: [
+     { name: "ABI KURNIAWAN", gender: "B" },
+     { name: "AHMAD NUR FAUJI", gender: "B" },
+     { name: "AI HANI NURAENI", gender: "B" },
+     { name: "ANISA LESTARI", gender: "B" },
+     { name: "DAFFA HERDIANSYAH ASVI", gender: "B" },
+     { name: "EDPAN ELPANA", gender: "B" },
+     { name: "HAMKA SAKA FANDIYA", gender: "B" },
+     { name: "HAURA NURBAYANTI", gender: "B" },
+     { name: "HENDRIK ANTONI IRAWAN", gender: "B" },
+     { name: "HERI SUPRIATNO", gender: "B" },
+     { name: "HERINA FITRIANI", gender: "B" },
+     { name: "ISMI SULASTRI", gender: "B" },
+     { name: "JIAN HANAPIAH", gender: "B" },
+     { name: "KAMAL", gender: "B" },
+     { name: "M. RAFLI HERIAWAN", gender: "B" },
+     { name: "MELINDA", gender: "B" },
+     { name: "MELISA", gender: "B" },
+     { name: "ΜΟΝΙΚΑ", gender: "B" },
+     { name: "MUHAMAD AL FARIDZ", gender: "B" },
+     { name: "MUHAMAD FIRDAOS SEPAKAT", gender: "B" },
+     { name: "MUHAMAD MURTAKI", gender: "B" },
+     { name: "NASYA ZAHRATUL JANAH", gender: "B" },
+     { name: "NAZMIA ALKHUMAIRA", gender: "B" },
+     { name: "NENG ALISA", gender: "B" },
+     { name: "NURWIDIA AYU PUSPITA", gender: "B" },
+     { name: "PEBRIAN ALPAT", gender: "B" },
+     { name: "RASYA RAHADIAN", gender: "B" },
+     { name: "REPAN SUTIAWAN", gender: "B" },
+     { name: "RIZKI DZULFIKRI", gender: "B" },
+     { name: "ROSITA HAYANTI", gender: "B" },
+     { name: "SINDI ANDITA", gender: "B" },
+     { name: "SINDI AULIA", gender: "B" },
+     { name: "SRI LULU AYU HERLINA", gender: "B" },
+     { name: "WINI AWALIA HIJIYANI", gender: "B" },
+                ],
+     C: [
+     { name: "ABDUL JALIL", gender: "C" },
+     { name: "AI NUR ROSYIDAH", gender: "C" },
+     { name: "ALYA FIRLIA", gender: "C" },
+     { name: "AYUZI KARNAIN", gender: "C" },
+     { name: "DANANG PRAYOGA", gender: "C" },
+     { name: "DANI SUTIAWAN", gender: "C" },
+     { name: "FAHAD PRAWIRA", gender: "C" },
+     { name: "FINA SAPUTRI", gender: "C" },
+     { name: "GHAISHA ANINDIA PASHA", gender: "C" },
+     { name: "GUNTUR ADITIA", gender: "C" },
+     { name: "HANIMA USWATUN HASANAH", gender: "C" },
+     { name: "JINGGA JUWITA SARI", gender: "C" },
+     { name: "LAMYA PUTRI ROSANI", gender: "C" },
+     { name: "MILA WULANDARI", gender: "C" },
+     { name: "MOCH KELVIN LUKIANA SAPUTRA", gender: "C" },
+     { name: "MUHAMAD ANJAR ALMUKSIN", gender: "C" },
+     { name: "MUHAMAD HENDI", gender: "C" },
+     { name: "MUHAMAD PIRMAN SAPUTRA", gender: "C" },
+     { name: "MUHAMAD SA'DAN", gender: "C" },
+     { name: "MUHAMAD SAEPULLOH", gender: "C" },
+     { name: "NADIA VEGA", gender: "C" },
+     { name: "NAYISILA NURALISA", gender: "C" },
+     { name: "NUBAETI", gender: "C" },
+     { name: "NUR AIDA MEILANI", gender: "C" },
+     { name: "PUJIYATI", gender: "C" },
+     { name: "PUTRA DWI FRADISTA", gender: "C" },
+     { name: "RAHMA YUNIAR ALFIAH", gender: "C" },
+     { name: "RENATA", gender: "C" },
+     { name: "RISKI ADITIA", gender: "C" },
+     { name: "SAHIDUL FAJAR", gender: "C" },
+     { name: "SINTA AYU PEBRIANTI", gender: "C" },
+     { name: "SITI LUTFIA SALSABILA QS", gender: "C" },
+     { name: "SYAHRIL ARDIANSYAH", gender: "C" },
+     { name: "WAWAN PERMANA", gender: "C" },
+     { name: "MUTIARA NURUL INSAN", gender: "C" },
+                ],
+     D: [
+     { name: "ABDUL ROHMAN", gender: "D" },
+     { name: "ACEP RIZAL", gender: "D" },
+     { name: "AGNI MAULIDIA", gender: "D" },
+     { name: "AI NUR FAHILAH", gender: "D" },
+     { name: "ALDI MAULANA", gender: "D" },
+     { name: "ALDO", gender: "D" },
+     { name: "ANISA RIZKIAH", gender: "D" },
+     { name: "ASYIKA FATHIA MAULIDA", gender: "D" },
+     { name: "DARA AYU DWI IHSANI", gender: "D" },
+     { name: "FAUZIAH", gender: "D" },
+     { name: "FAZRIL HERDIANSAH", gender: "D" },
+     { name: "FITRI AULIA", gender: "D" },
+     { name: "HESTI APRIANI", gender: "D" },
+     { name: "HILMI", gender: "D" },
+     { name: "IRA MAYASOPA", gender: "D" },
+     { name: "MOCHAMAD FAISAL R", gender: "D" },
+     { name: "MOHAMAD IHSAN", gender: "D" },
+     { name: "MUHAMAD FABIAN ALBANI PUTRA", gender: "D" },
+     { name: "MUHAMAD TAPRIZ TAMZANI", gender: "D" },
+     { name: "NAIRA SALSA BILA", gender: "D" },
+     { name: "NURUL ALVIA", gender: "D" },
+     { name: "RAFDI NURIL BAYANI", gender: "D" },
+     { name: "RAHMAH NURHALIZAH", gender: "D" },
+     { name: "RANGGA ADE LIANA", gender: "D" },
+     { name: "RESI", gender: "D" },
+     { name: "RICKY NUGRAHA", gender: "D" },
+     { name: "RISMA NOVIANTI", gender: "D" },
+     { name: "RIZKY ADITIA RUSLAN", gender: "D" },
+     { name: "ROS NENAWATI", gender: "D" },
+     { name: "RUSTANDI", gender: "D" },
+     { name: "SELVI FAUZIAH", gender: "D" },
+     { name: "SITI ANDRIANI", gender: "D" },
+     { name: "SITI MISRIA ANPALI", gender: "D" },
+     { name: "SYAKIRA AMANDA PUTRI", gender: "D" },
+                ],
+     E: [
+     { name: "ADLIS FEBRIAN", gender: "E" },
+     { name: "AGNA SAMSI GUNAWAN", gender: "E" },
+     { name: "AGUNG YUDA SALIM", gender: "E" },
+     { name: "AI SRI RAHAYU", gender: "E" },
+     { name: "ALVIANI JULIANTI", gender: "E" },
+     { name: "ANDRI YUSUP MAULANA", gender: "E" },
+     { name: "AYUNITA GUSTIANI", gender: "E" },
+     { name: "CEP ULOH", gender: "E" },
+     { name: "DARA SEPTIA RAMADHANI", gender: "E" },
+     { name: "DERLI HENDRIANSYAH", gender: "E" },
+     { name: "ELSA SAFITRI", gender: "E" },
+     { name: "EVAN NADIANSAH", gender: "E" },
+     { name: "GANDI", gender: "E" },
+     { name: "HASA NUGRAHA LALAPA", gender: "E" },
+     { name: "HUSNI MUBAROK", gender: "E" },
+     { name: "JAHRA SALAMATU ALPIA", gender: "E" },
+     { name: "LAYLA MARLIANA", gender: "E" },
+     { name: "M. BAYU FAUZI", gender: "E" },
+     { name: "MOH RAZIB TRI GUSTIAN SUBANA", gender: "E" },
+     { name: "MUHAMMAD LUTFI LESMANA", gender: "E" },
+     { name: "NAJWA KAMILAH", gender: "E" },
+     { name: "NENG NAZWA MARIA", gender: "E" },
+     { name: "PUTRI AULIA HUTAMI", gender: "E" },
+     { name: "REPANDI", gender: "E" },
+     { name: "REZWA NURUL SUBADAY", gender: "E" },
+     { name: "RISTA FAIRUS SYADIAH", gender: "E" },
+     { name: "SALVA NURANI", gender: "E" },
+     { name: "SELA SELINDA", gender: "E" },
+     { name: "SITI DARIAH", gender: "E" },
+     { name: "SITI NURSOLIHAH", gender: "E" },
+     { name: "SUGIH INSANI", gender: "E" },
+     { name: "SUSI IRMA YANTI", gender: "E" },
+     { name: "YUNITA RAMADANI", gender: "E" },
+     { name: "YUSNI HIDAYAT", gender: "E" },
+     { name: "ERWIN HAKIM", gender: "E" },
+                ],
+     F: [
+     { name: "AGUNG PAUZI", gender: "F" },
+     { name: "AINI SALSA BILA", gender: "F" },
+     { name: "ALDA SINTA BELA", gender: "F" },
+     { name: "ALIA KARTIKA", gender: "F" },
+     { name: "ALIKA TRIANA PUTRI RAMDANI", gender: "F" },
+     { name: "ALWA ABDILAH", gender: "F" },
+     { name: "ANGGA SAPUTRA", gender: "F" },
+     { name: "APRIZAL KAISTAN", gender: "F" },
+     { name: "DEVI ALVIANI", gender: "F" },
+     { name: "DIANA", gender: "F" },
+     { name: "DINDA TRISPIYANI", gender: "F" },
+     { name: "HENDRIANSYAH", gender: "F" },
+     { name: "INTAN NURAENI RAHMATILAH", gender: "F" },
+     { name: "ISMADY ALYANDI", gender: "F" },
+     { name: "IVO RIDOTULINSANI", gender: "F" },
+     { name: "JIHAN PAHERA", gender: "F" },
+     { name: "KHAIRUL ALIP NURULLAH", gender: "F" },
+     { name: "LAILA LUTFIA", gender: "F" },
+     { name: "LENA HERYANI", gender: "F" },
+     { name: "LINDA ANDRAENI", gender: "F" },
+     { name: "M.A. ROHMAN JAELANI", gender: "F" },
+     { name: "MUHAMAD IHSAN", gender: "F" },
+     { name: "MUHAMAD REZA NUGRAHA", gender: "F" },
+     { name: "MUHAMMAD ZULFIKRI SYUKUR", gender: "F" },
+     { name: "MUSA ALFAUZAN", gender: "F" },
+     { name: "NENG HUNAJAH", gender: "F" },
+     { name: "NENG RESA AMELIA NUGRAHA", gender: "F" },
+     { name: "RIPA ANJANI", gender: "F" },
+     { name: "RISMA SARA PAUZIAH", gender: "F" },
+     { name: "RISMA WIARGA", gender: "F" },
+     { name: "SAPA PATMAWATI", gender: "F" },
+     { name: "SEPTIADI", gender: "F" },
+     { name: "SITI SALWA NUR HIKMAT", gender: "F" },
+     { name: "SRI ALIPA", gender: "F" },
+                ],
+     G: [
+     { name: "AKBAR NUGRAHA", gender: "G" },
+     { name: "ALMA APRILIA", gender: "G" },
+     { name: "ALYANTI", gender: "G" },
+     { name: "ANWAR MUSADAD", gender: "G" },
+     { name: "DELA SUSANTI", gender: "G" },
+     { name: "DENDI SUGIANTO", gender: "G" },
+     { name: "DINDA JULIASARI", gender: "G" },
+     { name: "FAISAL CAHYA PRATAMA", gender: "G" },
+     { name: "FIZRIA AZ ZAHRA", gender: "G" },
+     { name: "HABIIB RIJKI", gender: "G" },
+     { name: "IKBAL", gender: "G" },
+     { name: "IKLAS WILIAN MAULANA", gender: "G" },
+     { name: "JANUAR KEMAL FIRDAOS", gender: "G" },
+     { name: "LIA AGUSTINA", gender: "G" },
+     { name: "LIDIA SULISTIANI", gender: "G" },
+     { name: "LULU PAOJIAH", gender: "G" },
+     { name: "M. RIKI AZI PADILAH", gender: "G" },
+     { name: "MUHAMAD RAYHAN", gender: "G" },
+     { name: "MUHAMMAD RIZKI MAULANA", gender: "G" },
+     { name: "NENG SINTIA", gender: "G" },
+     { name: "NISARAH", gender: "G" },
+     { name: "NUGRAHA", gender: "G" },
+     { name: "REPALIANI PUTRI", gender: "G" },
+     { name: "RIPAL RAMADANI", gender: "G" },
+     { name: "RIVA RIYANTI", gender: "G" },
+     { name: "RIZKA NURUL MAHROMAH", gender: "G" },
+     { name: "SAEPULANDI", gender: "G" },
+     { name: "SAHRANI", gender: "G" },
+     { name: "SALMA MARSA ALIA", gender: "G" },
+     { name: "SALSA ALPIYANI", gender: "G" },
+     { name: "SINDI MULTIYANI", gender: "G" },
+     { name: "SITI JAHRAH", gender: "G" },
+     { name: "TEGUH HARDIAN", gender: "G" },
+     { name: "SILVIA", gender: "G" },
+
+
+
+                ],
+     H: [
+     { name: "AI LENI WAHYUNI", gender: "H" },
+     { name: "AI NURYANI", gender: "H" },
+     { name: "ALFAN HENRIAN MEYSAM KEN.A.", gender: "H" },
+     { name: "ANGGI MAULANA", gender: "H" },
+     { name: "ANRIANA SRI SUKMA RAHAYU", gender: "H" },
+     { name: "BAYU SUBAGJA", gender: "H" },
+     { name: "DELVI AULIA SARI", gender: "H" },
+     { name: "DEWI ANJANI", gender: "H" },
+     { name: "DIMAS ADITIA GINANJAR", gender: "H" },
+     { name: "ELENA SALSABILA", gender: "H" },
+     { name: "INDI AMALIA", gender: "H" },
+     { name: "JENAL MUTAKIN", gender: "H" },
+     { name: "KAYLA AULIA CAHYA KHIRANI", gender: "H" },
+     { name: "LISTIA MULYATI", gender: "H" },
+     { name: "M RIZKY SAHERTIAN", gender: "H" },
+     { name: "MELI", gender: "H" },
+     { name: "MUHAMAD PADILAH", gender: "H" },
+     { name: "MUHAMAD RIZKY ADITYA", gender: "H" },
+     { name: "MUHAMAD SIDIK", gender: "H" },
+     { name: "NAZRIL MUHAMAD IRGI", gender: "H" },
+     { name: "NESA DIANA PUTRI", gender: "H" },
+     { name: "ΝΟΡΙΑ NINGSIH", gender: "H" },
+     { name: "RAMDANI", gender: "H" },
+     { name: "RIAN ABDUL ROJAK", gender: "H" },
+     { name: "SALWA FAUZIAH", gender: "H" },
+     { name: "SANDI", gender: "H" },
+     { name: "SIPA NAZWA NURUL PADILAH", gender: "H" },
+     { name: "SITI NAYRA HANIFA", gender: "H" },
+     { name: "SITI NURHASANAH", gender: "H" },
+     { name: "SOFIAH DEWIYANTI", gender: "H" },
+     { name: "SUSI JULIANTI", gender: "H" },
+     { name: "UCEP SAPAAT", gender: "H" },
+     { name: "WANDI AGUSTIAN", gender: "H" },
+     { name: "ILHAM", gender: "H" },
+
+                ],
+     i: [
+     { name: "A.DIANSYAH LATIP", gender: "i" },
+     { name: "AGNESSA YULIYANI", gender: "i" },
+     { name: "ANISA FITRI", gender: "i" },
+     { name: "ANISA NURPADILAH", gender: "i" },
+     { name: "APIPAH NURPAOZIAH", gender: "i" },
+     { name: "ARIS FAISAL", gender: "i" },
+     { name: "BISMA PRASETYA ANDRIAN", gender: "i" },
+     { name: "DALIAH", gender: "i" },
+     { name: "DENTI RAHMAWATI", gender: "i" },
+     { name: "EGA INTAN MAELANI", gender: "i" },
+     { name: "ERPAN", gender: "i" },
+     { name: "HADI SUGIANTO", gender: "i" },
+     { name: "HUTAGALUH ALGIORAZFA", gender: "i" },
+     { name: "IRWAN MUKANDIR", gender: "i" },
+     { name: "LUSY MARDIANA", gender: "i" },
+     { name: "M. HAIKAL KUSUMAH", gender: "i" },
+     { name: "MAULIDIA SIFA", gender: "i" },
+     { name: "MIRNAWATI", gender: "i" },
+     { name: "MUCH MILAN NUGRAHA", gender: "i" },
+     { name: "MUHAMAD FATHIR ALAZIZ", gender: "i" },
+     { name: "MUHAMAD REHAN HIDAYAT", gender: "i" },
+     { name: "MUHAMMAD MISBAHUL ULUM", gender: "i" },
+     { name: "MUHAMMAD YUZLI", gender: "i" },
+     { name: "NAZWA RAYISABILA", gender: "i" },
+     { name: "NENDY SAPUTRA JUWANDI", gender: "i" },
+     { name: "RAHAF FARHANOURA", gender: "i" },
+     { name: "RAHMAWATI", gender: "i" },
+     { name: "SANIAH RAHMADANI", gender: "i" },
+     { name: "SILVI AMELIA", gender: "i" },
+     { name: "SITI JAHRAH", gender: "i" },
+     { name: "UCI FAHMI", gender: "i" },
+     { name: "WINI OPTAPΙΑΝΙ", gender: "i" },
+     { name: "ZILAH ASTIAWATI", gender: "i" },
+     { name: "YEDI MAULANA", gender: "i" },
+
+                ],
+            },
+            //untuk di bagian ini kls XI "kels jang hamzah nu ka se cek ma mah meren kitu ge "
+ XI: {
+    A: [
+   { name: "ABDUL AZIZ", gender: "A" },
+   { name: "AHMAD SANUSI", gender: "A" },
+   { name: "AI NURRIFA", gender: "A" },
+   { name: "ALMIRA OKTAVIA", gender: "A" },
+   { name: "ALWI RAMDANI", gender: "A" },
+   { name: "ARDILA MARDIANA PUTRI", gender: "A" },
+   { name: "BAMBANG PUTRA SEJAHTERA", gender: "A" },
+   { name: "DENIS", gender: "A" },
+   { name: "DHIKA SAPUTRA", gender: "A" },
+   { name: "DINI WAHYUNI", gender: "A" },
+   { name: "IVAN MAULANA", gender: "A" },
+   { name: "KANIA SUCI", gender: "A" },
+   { name: "LINDA PUZAWATI", gender: "A" },
+   { name: "LISTIANA NURUL FATIMAH", gender: "A" },
+   { name: "M. HAKI", gender: "A" },
+   { name: "MILDI", gender: "A" },
+   { name: "MUHAMAD DIMAS JULIAN", gender: "A" },
+   { name: "MUHAMAD HAMZAH", gender: "A" },
+   { name: "NAJMA", gender: "A" },
+   { name: "NAZAR", gender: "A" },
+   { name: "NENG MAULIDA", gender: "A" },
+   { name: "RIYAN KARISMAWANTI", gender: "A" },
+   { name: "SALWA OKTAVIANI", gender: "A" },
+   { name: "SINTA KUSNIATI", gender: "A" },
+   { name: "SITI ANITA ANANDA", gender: "A" },
+   { name: "SITI DAMIYATI", gender: "A" },
+   { name: "SITI RAHMAWATI", gender: "A" },
+   { name: "SUSANTI", gender: "A" },
+   { name: "TIARA APRIL LIANTI", gender: "A" },
+   { name: "YUNITA SILVIANA", gender: "A" },
+
+                ],
+    B: [
+    { name: "ABDUL RAUP AL MALIK", gender: "B" },
+    { name: "AHMAD WIGUNA NUGRAHA", gender: "B" },
+    { name: "AI RO'YA WIYANI", gender: "B" },
+    { name: "ALIFSHA BARNEZ WARDANI", gender: "B" },
+    { name: "AYU DWI LESTARI", gender: "B" },
+    { name: "CICI SEPTIA ANGGRAENI", gender: "B" },
+    { name: "DENDRA", gender: "B" },
+    { name: "KRISTASA NURHIKMAH", gender: "B" },
+    { name: "LIDYA MARTIANTY", gender: "B" },
+    { name: "LITA TALISA MARTIN", gender: "B" },
+    { name: "M LINDAN", gender: "B" },
+    { name: "MIRA", gender: "B" },
+    { name: "MUTIARA RATNA DEWI", gender: "B" },
+    { name: "NAWAL KURNIAWATI", gender: "B" },
+    { name: "NURAENI", gender: "B" },
+    { name: "NURUL SYAHIDA", gender: "B" },
+    { name: "PERDI MAULANA", gender: "B" },
+    { name: "PITRI ARYANTI", gender: "B" },
+    { name: "RAKA RIDHO BRILLIAN", gender: "B" },
+    { name: "RISMA", gender: "B" },
+    { name: "RISTIYANI INRI", gender: "B" },
+    { name: "RIZKI ALKAHPΙ", gender: "B" },
+    { name: "RIZKI NUGRAHA", gender: "B" },
+    { name: "SAEPULOH", gender: "B" },
+    { name: "SALMAN NURULOH", gender: "B" },
+    { name: "SAMSUL BAHRI", gender: "B" },
+    { name: "SITI ALISAH", gender: "B" },
+    { name: "SITI PATMAWATI", gender: "B" },
+    { name: "TIARA SALEHAH", gender: "B" },
+    { name: "YASPI AL MAJID", gender: "B" },
+    { name: "ZAHRA NANDA PUSPITA", gender: "B" },
+                ],
+    C: [
+    { name: "ABU BAKAR SIDIK", gender: "C" },
+    { name: "AGUNG", gender: "C" },
+    { name: "ALTAF TAZRANI", gender: "C" },
+    { name: "ANITASARI", gender: "C" },
+    { name: "DEA ANANDA", gender: "C" },
+    { name: "DENIA REGISYA", gender: "C" },
+    { name: "DEWI AWALIA", gender: "C" },
+    { name: "FIRMANDIKA ALFAHRI", gender: "C" },
+    { name: "HAIKAL TRI JULIANTO", gender: "C" },
+    { name: "HASBIALLOH", gender: "C" },
+    { name: "KRISTIN YUNI MINARTI", gender: "C" },
+    { name: "MEISYA AYU DWI PRATIWI", gender: "C" },
+    { name: "MUHAMAD FAJAR ANUGRAH", gender: "C" },
+    { name: "MUHAMAD REVAN NUGRAHA", gender: "C" },
+    { name: "MUHAMAD RIZAL AULIA", gender: "C" },
+    { name: "MUHAMMAD RAMDANI AL PALAH", gender: "C" },
+    { name: "MUHAMAD SAMSUDIN", gender: "C" },
+    { name: "NATASYA", gender: "C" },
+    { name: "NURKΑΝΤΙΝΑ", gender: "C" },
+    { name: "PARHAN", gender: "C" },
+    { name: "RAHMATULOH SIDIQ", gender: "C" },
+    { name: "REDI ARDIANSYAH", gender: "C" },
+    { name: "RENA AINUR ROHIMAH", gender: "C" },
+    { name: "RIYANA ABDILIYANTI", gender: "C" },
+    { name: "RUSMAΝΑ", gender: "C" },
+    { name: "SHAQYRA ANASTASIA ISKANDAR", gender: "C" },
+    { name: "SITI NUR AZIZAH", gender: "C" },
+    { name: "SUMANTRI", gender: "C" },
+    { name: "YULIA SUKMAWATI", gender: "C" },
+
+                ],
+    D: [
+    { name: "AHMAD DANI", gender: "D" },
+    { name: "ANDRIANSYAH", gender: "D" },
+    { name: "AULIA TUSMALIA", gender: "D" },
+    { name: "DEDE SUBAGJA", gender: "D" },
+    { name: "ENDANG", gender: "D" },
+    { name: "FAUZI RIANA", gender: "D" },
+    { name: "HAMDAN FAUZI", gender: "D" },
+    { name: "INDRA ACHMAD FAUZI", gender: "D" },
+    { name: "IZMA AULIA FAULINA", gender: "D" },
+    { name: "JUWITA ROSMAYA", gender: "D" },
+    { name: "LAILA DARIFATUL HIDAYAH", gender: "D" },
+    { name: "LUKMAN HIDAYAT", gender: "D" },
+    { name: "MIRA NAIMA RIKA ZENCA", gender: "D" },
+    { name: "MUHAMAD ADNAN SETIAWAN", gender: "D" },
+    { name: "MUHAMAD ARPA PAUZI", gender: "D" },
+    { name: "MUHAMAD REPAN", gender: "D" },
+    { name: "N. SITI ZIHAN P.", gender: "D" },
+    { name: "NENG ERNAWATI", gender: "D" },
+    { name: "RIDHA MAULANA", gender: "D" },
+    { name: "RISKA AMELIA", gender: "D" },
+    { name: "SEPΤΙΑΝ", gender: "D" },
+    { name: "SIN SIN", gender: "D" },
+    { name: "SISKA", gender: "D" },
+    { name: "SURYA PERMANA", gender: "D" },
+    { name: "TRIPIA RAHMA PAUJI ALAWIAH", gender: "D" },
+    { name: "UUL HUSNA", gender: "D" },
+    { name: "WINDA YASHADATUL AISYI", gender: "D" },
+    { name: "YUDA PRASETIA", gender: "D" },
+
+                ],
+    E: [
+    { name: "AHMAD FAOJAN", gender: "E" },
+    { name: "AHMAD TAOPIK", gender: "E" },
+    { name: "AMANDA NURLAELA", gender: "E" },
+    { name: "ANGGARA ADITYA SUDRAZAT", gender: "E" },
+    { name: "BAYU PERMANA SAPUTRA", gender: "E" },
+    { name: "CANDRA JATNIKA SUGIATNA", gender: "E" },
+    { name: "IKMAL RAMDANI", gender: "E" },
+    { name: "JAMIL RAMDANI", gender: "E" },
+    { name: "KHOUMAIRA RATU SYIFA", gender: "E" },
+    { name: "LISTA AMELIA", gender: "E" },
+    { name: "M NIZAR NISVI SABAN", gender: "E" },
+    { name: "Μ. KAKA ARDIANSAH", gender: "E" },
+    { name: "MUHAMMAD ARIPIN", gender: "E" },
+    { name: "NADILA PUSPITA GUSTIANA", gender: "E" },
+    { name: "NAILA NURANI PUTRI", gender: "E" },
+    { name: "NAZWA HAERI AZKIYA", gender: "E" },
+    { name: "NENG DELIS DAWIAH", gender: "E" },
+    { name: "NENG RESTIKA AGUSTIAWAN", gender: "E" },
+    { name: "NURUL PAOJI", gender: "E" },
+    { name: "PRIJAL", gender: "E" },
+    { name: "REPAL MAELANI", gender: "E" },
+    { name: "RINA", gender: "E" },
+    { name: "RIPAN RIPANSAH", gender: "E" },
+    { name: "SAEPUL ANWAR", gender: "E" },
+    { name: "SAYYIDINA HIDAYAH", gender: "E" },
+    { name: "SINTA", gender: "E" },
+    { name: "SINTYA NABILA", gender: "E" },
+    { name: "SITI ZAKIA NUR AGUSTIN", gender: "E" },
+    { name: "SULASTRI", gender: "E" },
+    { name: "VIKY ALDIANSYAH", gender: "E" },
+    { name: "YOGA SANDIKA", gender: "E" },
+    { name: "YULIA NANDA LESTARI", gender: "E" },
+    { name: "ZAKI RAMADAN", gender: "E" },
+
+                ],
+    F: [
+    { name: "ADHAM BAMBANG PRATAMA D", gender: "F" },
+    { name: "ADISTI MAHARANI", gender: "F" },
+    { name: "ALDI", gender: "F" },
+    { name: "ALIP REHAN TAPDILA", gender: "F" },
+    { name: "AZKA SYARIF AL-ARQAM", gender: "F" },
+    { name: "BUNGA FEBRIYANI", gender: "F" },
+    { name: "DEDE RIZKI", gender: "F" },
+    { name: "DELA NUR SHIFA", gender: "F" },
+    { name: "DENNICO RAHMAN SOPIYANDI", gender: "F" },
+    { name: "DIANA MUSTIKA", gender: "F" },
+    { name: "DIMAS", gender: "F" },
+    { name: "FIRNANDA", gender: "F" },
+    { name: "HOIRUNISA FITRIYANI", gender: "F" },
+    { name: "MOCH SAHAL RAZAQ", gender: "F" },
+    { name: "MUHAMAD RIFKI SEPTIANA", gender: "F" },
+    { name: "MUHAMMAD FAHRI AL RIZKI", gender: "F" },
+    { name: "MUHAMMAD RIAN RIZALDI", gender: "F" },
+    { name: "NENENG SITI JULAEHA", gender: "F" },
+    { name: "NENG AMALIA LESTARI", gender: "F" },
+    { name: "NURAENI MULYADI", gender: "F" },
+    { name: "RAHMA", gender: "F" },
+    { name: "RAHMA ANISA", gender: "F" },
+    { name: "RAISA QABILA NISA", gender: "F" },
+    { name: "REZA PRATΑΜΑ", gender: "F" },
+    { name: "SALSABILA HOERUNNISA", gender: "F" },
+    { name: "SALSABILA MARTSYA DEVINA PUTR", gender: "F" },
+    { name: "SEPWAZDI", gender: "F" },
+    { name: "SILVA DINO FITRIA", gender: "F" },
+    { name: "SILVIA", gender: "F" },
+    { name: "SINTA ROSITA", gender: "F" },
+    { name: "SITI NURAZIZAH", gender: "F" },
+    { name: "SRY ANDHINI CHINTA RAHAYU", gender: "F" },
+    { name: "SUCI MUSTIKA MULIAWATI", gender: "F" },
+    { name: "TUTI ALAWIYAH", gender: "F" },
+    { name: "YOGI ANANDA SAPUTRA", gender: "F" },
+    { name: "YUNI ASYANI", gender: "F" },
+
+                ],
+    G: [
+    { name: "AI SITI MARWAH", gender: "G" },
+    { name: "ALYA NURNATASYA", gender: "G" },
+    { name: "AMELIA NURKAMILA NOVIANTI", gender: "G" },
+    { name: "ANGELINA GUNAWAN", gender: "G" },
+    { name: "AYU SUCI LESTARI", gender: "G" },
+    { name: "CINTA MUSTIKA", gender: "G" },
+    { name: "DITA RIANTI", gender: "G" },
+    { name: "FITRI ANTRIANI", gender: "G" },
+    { name: "HAIVA PUTRI DILASTRI", gender: "G" },
+    { name: "HANINDA PUTRI NABILA", gender: "G" },
+    { name: "ICA LUTPI AL-AULIA", gender: "G" },
+    { name: "KAJNI PERAL", gender: "G" },
+    { name: "KUSUMA AMBAR WATI", gender: "G" },
+    { name: "LIAWATI", gender: "G" },
+    { name: "NADYA ANTΙΚΑ", gender: "G" },
+    { name: "NAZWA AULIA SAFIRA", gender: "G" },
+    { name: "NENG SARAH SUMARNI", gender: "G" },
+    { name: "NURHASANAH FAUZIAH", gender: "G" },
+    { name: "NENG WULAN", gender: "G" },
+    { name: "RAISHA AGGUSTIN", gender: "G" },
+    { name: "RANI ARDILA", gender: "G" },
+    { name: "RESTIANI", gender: "G" },
+    { name: "RIMA AULIA SARI", gender: "G" },
+    { name: "RIMA NURIYANTI", gender: "G" },
+    { name: "RISKA NURAENI", gender: "G" },
+    { name: "RISMAWATI", gender: "G" },
+    { name: "SANDA SETIAWATI", gender: "G" },
+    { name: "SARAH", gender: "G" },
+    { name: "SITI MUSLIMAH", gender: "G" },
+    { name: "SOPI NURAENI", gender: "G" },
+    { name: "SRI RAHAYU", gender: "G" },
+    { name: "SRI YUNI NURAENI", gender: "G" },
+    { name: "WARDAH SITI YUSRIAH", gender: "G" },
+    { name: "ZAHRA RAHMANIA PUTRI", gender: "G" },
+
+
+                ],
+    H: [
+    { name: "ABI SULTON", gender: "H" },
+    { name: "AGNIA SALWA SAHARA", gender: "H" },
+    { name: "AGUNG ROSUL", gender: "H" },
+    { name: "AHMAD RADIT MEGIANTO", gender: "H" },
+    { name: "AINA DINI APRILIA", gender: "H" },
+    { name: "ALANSYAH", gender: "H" },
+    { name: "ALDI PERMANA", gender: "H" },
+    { name: "ALMA DEVINA", gender: "H" },
+    { name: "APRILIA MAHARANI", gender: "H" },
+    { name: "AZMY JESSICA FUTRI", gender: "H" },
+    { name: "DEDE VIOLA", gender: "H" },
+    { name: "DILA NURANDIANI", gender: "H" },
+    { name: "ELISA MAESA RIZKIAH", gender: "H" },
+    { name: "ELSA NADIRA", gender: "H" },
+    { name: "ENDAH FAHMI SAPITRI", gender: "H" },
+    { name: "FUTRY RISDIANA ULFA", gender: "H" },
+    { name: "GALIH ADITIA PERMANA", gender: "H" },
+    { name: "HILDA WULANSARI", gender: "H" },
+    { name: "IRFAN FIRDAUS", gender: "H" },
+    { name: "JULFIKAR", gender: "H" },
+    { name: "ΚΑΚA ADITIA", gender: "H" },
+    { name: "MIRNAWATI", gender: "H" },
+    { name: "MOCHAMMAD ZAKI HERMAWAN", gender: "H" },
+    { name: "MOH LUTVI FAHLEFI", gender: "H" },
+    { name: "MUHAMAD RAMDANI", gender: "H" },
+    { name: "NAZWA TRI AMANDA", gender: "H" },
+    { name: "NURDANIAH", gender: "H" },
+    { name: "NURHIKMAT", gender: "H" },
+    { name: "PATIMAH DAYINISA", gender: "H" },
+    { name: "RAFLI MOHAMAD SIDIK", gender: "H" },
+    { name: "RIKI RIDHO BRILLIAN", gender: "H" },
+    { name: "RISWAN ALAMSYAH", gender: "H" },
+    { name: "SHIPA URROHMAH", gender: "H" },
+    { name: "TRIA ANANDA", gender: "H" },
+
+
+                ],
+            },
+            
+            //iyeteh kls 12 nu sosk sosk an jeng sombong 
+  XII: {
+     A: [
+    { name: "ADITIA GUSNIAWAN", gender: "A" },
+    { name: "AGUNG TAOPIK", gender: "A" },
+    { name: "AI HADIANTI", gender: "A" },
+    { name: "AJENG DELA MAYANGSARI", gender: "A" },
+    { name: "ALDA AZHURA AULIA SAPUTRI", gender: "A" },
+    { name: "BRYAN RAFAEL", gender: "A" },
+    { name: "CITRA AYUNINGTIAS", gender: "A" },
+    { name: "DALFA NUR MUNZIAH", gender: "A" },
+    { name: "DERA NURUL NISA", gender: "A" },
+    { name: "EPA SUSILAWATI", gender: "A" },
+    { name: "FIDA KAMILAH", gender: "A" },
+    { name: "GIA PAUJIAH", gender: "A" },
+    { name: "HANA MULIA SARI", gender: "A" },
+    { name: "ΚΕΙZA SASILIA KOMARA PUTRI", gender: "A" },
+    { name: "LAHIRA MALDA", gender: "A" },
+    { name: "LIA AMELIA", gender: "A" },
+    { name: "M QUTHBI NURUL HUZAEN", gender: "A" },
+    { name: "M SOPIANDI NURHIDAYAT", gender: "A" },
+    { name: "MOH BANYU AJ SANTOSO", gender: "A" },
+    { name: "MUHAMAD RIZKI", gender: "A" },
+    { name: "Nazwa Syihab", gender: "A" },
+    { name: "NISMARA AYUDIA", gender: "A" },
+    { name: "NOOVA ALISZA", gender: "A" },
+    { name: "NURLATIPAH", gender: "A" },
+    { name: "RAHMAT", gender: "A" },
+    { name: "RATNASARI", gender: "A" },
+    { name: "Riska Julia Anisa", gender: "A" },
+    { name: "SILVI MAHARANI RUDIAT", gender: "A" },
+    { name: "SITI NUR APRILIANI", gender: "A" },
+    { name: "SITI SAPUROH BUNGA CAMPAKA", gender: "A" },
+    { name: "TITA TIARA", gender: "A" },
+    { name: "UJANG BUDI SAPUTRA", gender: "A" },
+    { name: "VINA ELIASARI", gender: "A" },
+    { name: "YULIANI AGUSTIN", gender: "A" },
+    { name: "Zahraria", gender: "A" },
+    { name: "siapa ya???", gender: "A" },
+
+         ],
+     B: [
+    { name: "AURA PRAMUGIA HERMAYADI", gender: "B" },
+    { name: "DIKI FIRMANSAH.", gender: "B" },
+    { name: "EPI", gender: "B" },
+    { name: "Ersa Mayori Sentiani", gender: "B" },
+    { name: "FAURIZ NURAGRIADI", gender: "B" },
+    { name: "FAUZAN SYAHPUTRA", gender: "B" },
+    { name: "INDRI WIJAYANTI", gender: "B" },
+    { name: "Kiki Fitriani", gender: "B" },
+    { name: "MELA PITRIANA", gender: "B" },
+    { name: "Mindi aprida", gender: "B" },
+    { name: "MUHAMAD MAS'UD", gender: "B" },
+    { name: "MUHAMAD MUKSIN", gender: "B" },
+    { name: "MUHAMAD YUSA DANIAL", gender: "B" },
+    { name: "MUHAMMAD RIZKI NUGRAHA", gender: "B" },
+    { name: "NABILA", gender: "B" },
+    { name: "Neneng Nuraeni", gender: "B" },
+    { name: "NENG AI LISNA", gender: "B" },
+    { name: "PELANGI AMALIA ZAHRA", gender: "B" },
+    { name: "PIKAR", gender: "B" },
+    { name: "PIRJI SEPDANANIA", gender: "B" },
+    { name: "PITRIANI", gender: "B" },
+    { name: "PITRI NURIAH", gender: "B" },
+    { name: "Raiz Abdilah Hermawan", gender: "B" },
+    { name: "RIANTO", gender: "B" },
+    { name: "SANDAWATI", gender: "B" },
+    { name: "SITI NURAINI", gender: "B" },
+    { name: "SRIKANDI HUMAIRA", gender: "B" },
+    { name: "TAOFIK ABDUROHMAN", gender: "B" },
+    { name: "WISNU", gender: "B" },
+    { name: "WULAN PIKO CAHYANI", gender: "B" },
+
+                ],
+     C: [
+    { name: "ALDI", gender: "C" },
+    { name: "ALDO JULI SAPUTRA", gender: "C" },
+    { name: "ALPI SEPTIANI", gender: "C" },
+    { name: "AMELIA DAMAYANTI", gender: "C" },
+    { name: "ANDIKA ADHIA LUPRIKA", gender: "C" },
+    { name: "ANGGI GINANJAR", gender: "C" },
+    { name: "ANWAR", gender: "C" },
+    { name: "ARIA LATIF RAMADHAN", gender: "C" },
+    { name: "ASNI NUR RAHMAH", gender: "C" },
+    { name: "AURELLIA SALSABILA", gender: "C" },
+    { name: "CEPI RUSYANDI", gender: "C" },
+    { name: "DITA HERYANTI", gender: "C" },
+    { name: "ELA HAYATI", gender: "C" },
+    { name: "HILDA PUTRIA PEBRIANI", gender: "C" },
+    { name: "HISAN BASIT", gender: "C" },
+    { name: "IGUN SEP JITI", gender: "C" },
+    { name: "MARWAN MURTAKI", gender: "C" },
+    { name: "MEYSSA RAHMA AQILA", gender: "C" },
+    { name: "MOH WAHYU HIDAYAT", gender: "C" },
+    { name: "MUHAMAD MAULANA RAUP", gender: "C" },
+    { name: "MUHAMAD SENDI", gender: "C" },
+    { name: "muhammad ramdani", gender: "C" },
+    { name: "MUSTARIP", gender: "C" },
+    { name: "NASRUL MIPTAHUL AMNAN", gender: "C" },
+    { name: "NENG RESI FUTRI EFENDI", gender: "C" },
+    { name: "NUR LAILA BERLIANA RAMADANI", gender: "C" },
+    { name: "RENO FAUZAN", gender: "C" },
+    { name: "RIFKI SETIAWAN", gender: "C" },
+    { name: "ROBI MAULANA", gender: "C" },
+    { name: "Salma Aprilia Kamal", gender: "C" },
+    { name: "SALWA NUR KARIMA", gender: "C" },
+    { name: "Sani Irawan", gender: "C" },
+
+                ],
+     D: [
+    { name: "ADHITIYA MUHAMAD SOEKATMADIRE", gender: "D" },
+    { name: "AGISNI NUR ADHA", gender: "D" },
+    { name: "AL FARIZ ABDULLAH", gender: "D" },
+    { name: "CAHYA SUMIRAT", gender: "D" },
+    { name: "DEA ANITA", gender: "D" },
+    { name: "DEDEH SAADAH", gender: "D" },
+    { name: "EVA", gender: "D" },
+    { name: "FAJAR SUKMA ALFAUZAN", gender: "D" },
+    { name: "FAZRI ALFAHREZI.", gender: "D" },
+    { name: "Heru Saputra", gender: "D" },
+    { name: "IRMA RISMAWANTI", gender: "D" },
+    { name: "M. ARIYA KURNIA", gender: "D" },
+    { name: "MAULANA MALIK ASMARA", gender: "D" },
+    { name: "muhamad hamdani", gender: "D" },
+    { name: "MUHAMAD YOHAN HIDAYAT", gender: "D" },
+    { name: "NENG NISVI NAURA FUTRI", gender: "D" },
+    { name: "NURSOPΡΙΑΗ", gender: "D" },
+    { name: "PARHAN DANI GARNIDA", gender: "D" },
+    { name: "Perdi D Kuswandi", gender: "D" },
+    { name: "RAHMAWATI", gender: "D" },
+    { name: "Resa Anggista", gender: "D" },
+    { name: "RISTI AWALIYAH", gender: "D" },
+    { name: "RIYANDI", gender: "D" },
+    { name: "SAEPUL BAHRI", gender: "D" },
+    { name: "SALMAN", gender: "D" },
+    { name: "SEVA DWI MIPTAH", gender: "D" },
+    { name: "Sri Rahayu", gender: "D" },
+    { name: "SRI RAHMAWATI", gender: "D" },
+    { name: "SUSAN NUR AOLIA", gender: "D" },
+    { name: "TASYA DWI RAMADANI", gender: "D" },
+    { name: "TIARA SINDASARI", gender: "D" },
+    { name: "VARIZZ RESQIANO ISKANDAR", gender: "D" },
+    { name: "WULANDARI", gender: "D" },
+    { name: "YOSEP RAMDAN NUGRAHA", gender: "D" },
+
+                ],
+     E: [
+    { name: "ADI ARDIANSAH", gender: "E" },
+    { name: "AMELIA DWI OKTAVIANI", gender: "E" },
+    { name: "ASEP KURNIA NURJAMAN", gender: "E" },
+    { name: "AYU AZHARI", gender: "E" },
+    { name: "ELIN KARLINA", gender: "E" },
+    { name: "Fazar Maulana.", gender: "E" },
+    { name: "IMELDA", gender: "E" },
+    { name: "INDRI", gender: "E" },
+    { name: "JENAL ARIF", gender: "E" },
+    { name: "JULIANI", gender: "E" },
+    { name: "LUTPI", gender: "E" },
+    { name: "M. YUSUP ABDUL AJIZ", gender: "E" },
+    { name: "MUHAMAD IKBAL FAOZI", gender: "E" },
+    { name: "MUHAMAD SALMAN NIPTAHUL MUNI", gender: "E" },
+    { name: "MUHAMAD SAMSUDIN", gender: "E" },
+    { name: "MUKHARIZA AWALIAH NUR", gender: "E" },
+    { name: "NOVITASARI", gender: "E" },
+    { name: "REFAN WAHYU P", gender: "E" },
+    { name: "Resti sri rahayu", gender: "E" },
+    { name: "RISKA AMELIA", gender: "E" },
+    { name: "SALSA FITRI", gender: "E" },
+    { name: "SEILA WIDIYA PUTRI", gender: "E" },
+    { name: "SITI NURPARIDA", gender: "E" },
+    { name: "SITI SAMSIAH", gender: "E" },
+    { name: "UJANG PAJAR", gender: "E" },
+    { name: "YUDI RAMADANI", gender: "E" },
+
+                ],
+     F: [
+    { name: "ABDUL BUHORI", gender: "F" },
+    { name: "ADE RIZWAN", gender: "F" },
+    { name: "AHMAD DANI", gender: "F" },
+    { name: "ANDI PERMANA", gender: "F" },
+    { name: "AULIA LATIEFA AWALIYAH", gender: "F" },
+    { name: "DENI HERDIANSYAH", gender: "F" },
+    { name: "DIAN", gender: "F" },
+    { name: "Endang", gender: "F" },
+    { name: "Esha Kusdiana", gender: "F" },
+    { name: "FAISAL AKBAR", gender: "F" },
+    { name: "FARIDA NAZWA MAULIDA", gender: "F" },
+    { name: "HADIS MULYADI", gender: "F" },
+    { name: "LENI NURAENI", gender: "F" },
+    { name: "MELI PITRIANI", gender: "F" },
+    { name: "MUHAMAD ARIPIN ILHAM", gender: "F" },
+    { name: "MUHAMAD SAHRIL MUBAROKАН", gender: "F" },
+    { name: "NURMALA", gender: "F" },
+    { name: "Parhan Salim", gender: "F" },
+    { name: "RESTI SUSANTI", gender: "F" },
+    { name: "Reza ripaldi", gender: "F" },
+    { name: "SELVI ERIXI ROSDIANA", gender: "F" },
+    { name: "SINTA LIDIAWATI", gender: "F" },
+    { name: "SITI RAHMAH NURHIDAYAH", gender: "F" },
+    { name: "YULIASARI", gender: "F" },
+    { name: "SYEHAN ASHFAHANI", gender: "F" },
+
+                ],
+     G: [
+    { name: "AGIS SAPUTRA", gender: "G" },
+    { name: "AHMAD ABDULLAH", gender: "G" },
+    { name: "ARUM MUSTIKA PUTRI", gender: "G" },
+    { name: "AZHAR SHIDIK ALMUFTI", gender: "G" },
+    { name: "DENI MURTAKI", gender: "G" },
+    { name: "DHERA LUSIANA MAHARANI", gender: "G" },
+    { name: "EKA RAMDANI", gender: "G" },
+    { name: "EVA YUNITA TRI ASTUTI", gender: "G" },
+    { name: "META MUTIARA QOLBI", gender: "G" },
+    { name: "MIRFA AULIA", gender: "G" },
+    { name: "MOCHAMAD RIZKI ALFARIJI", gender: "G" },
+    { name: "MUHAMAD TOSI SANDI ATMOJO", gender: "G" },
+    { name: "MUHAMAD ZIDAN", gender: "G" },
+    { name: "MUHAMMAD FADLY BUDIONO", gender: "G" },
+    { name: "NAJLA MAYA PRATIWI", gender: "G" },
+    { name: "NENENG RISHA HAKIM", gender: "G" },
+    { name: "NURAENI", gender: "G" },
+    { name: "NURHASANAH", gender: "G" },
+    { name: "Parid Maulana Ilham", gender: "G" },
+    { name: "Raihan Supian", gender: "G" },
+    { name: "RATNA AULIA", gender: "G" },
+    { name: "Resfiany sofia", gender: "G" },
+    { name: "Reza Aji Guntara", gender: "G" },
+    { name: "RIFA RAHMAWATI", gender: "G" },
+    { name: "RISYA PUTRI ESTIANTI", gender: "G" },
+    { name: "SALWA REPITA PUSPITA PUTRI", gender: "G" },
+    { name: "SALWA RIVALDA", gender: "G" },
+    { name: "SELMA YEJUNIATI", gender: "G" },
+    { name: "SENIA SULISTIAWATI", gender: "G" },
+    { name: "SILMI NURUL AULIA", gender: "G" },
+    { name: "SITI NAZLA HIKMATUNNISA", gender: "G" },
+    { name: "SRI NINGSIH", gender: "G" },
+
+                ],
+     H: [
+    { name: "ABDUL RIJAL", gender: "H" },
+    { name: "ALDI ALDIANSAH SAPUTRA", gender: "H" },
+    { name: "ALI MUHAMAD", gender: "H" },
+    { name: "ASTRID HAERANI", gender: "H" },
+    { name: "AZRIL RIPALDI", gender: "H" },
+    { name: "Dimas Nugraha", gender: "H" },
+    { name: "ERVA DZIKRILA ALFITRAH", gender: "H" },
+    { name: "Febia Gunawan", gender: "H" },
+    { name: "HAICKAL ZAR'AH", gender: "H" },
+    { name: "HERDI FIRMANSYAH", gender: "H" },
+    { name: "IVAN SETIA", gender: "H" },
+    { name: "ΚΑKANG KURNIADIN", gender: "H" },
+    { name: "Karisma Awalia Putri", gender: "H" },
+    { name: "MARLA ALISYAMI", gender: "H" },
+    { name: "MELIANI NURFADILAH", gender: "H" },
+    { name: "MOCH, PASHA ISKANDAR", gender: "H" },
+    { name: "Mutiara asari", gender: "H" },
+    { name: "NURDIANA", gender: "H" },
+    { name: "NURSAPITRI", gender: "H" },
+    { name: "RAISYHA SALLSABILA SETIAWAN", gender: "H" },
+    { name: "REFA NURENDAH", gender: "H" },
+    { name: "RENATA INDAH MC", gender: "H" },
+    { name: "Resa Rosalina", gender: "H" },
+    { name: "RINDI YANI", gender: "H" },
+    { name: "RISMA HARDIANTI", gender: "H" },
+    { name: "SAHRUL GUNAWAN", gender: "H" },
+    { name: "SALWA APRILIANI", gender: "H" },
+    { name: "SASY MELATI", gender: "H" },
+    { name: "Siti Deliana Putri", gender: "H" },
+    { name: "Siti Salmah", gender: "H" },
+    { name: "SUCI HELPIANI", gender: "H" },
+    { name: "SYIFA AWALIAH ASHARI", gender: "H" },
+    { name: "TIARA NANDA PUTRI", gender: "H" },
+    { name: "VIKRI VIRMANSYAH", gender: "H" },
+
+                ],
+            }
+        };
+//iyeteh nu di hanap lamun di banding ken jeng tubuh manusia teh ibarat urat ata otak nya eta javascrif
+
+
+//mohon maff untuk bagian javascrif nya kode nya berantakan 
+
+        let currentStudents = JSON.parse(JSON.stringify(originalStudents)); 
+
+        function updateRooms() {
+            const classSelect = document.getElementById("class");
+            const roomSelect = document.getElementById("room");
+            const studentsDiv = document.getElementById("students");
+            const selectedClass = classSelect.value;
+
+            roomSelect.innerHTML = '<option value="">--Pilih Ruang Kelas--</option>';
+            studentsDiv.innerHTML = '';
+
+            if (selectedClass) {
+                Object.keys(currentStudents[selectedClass]).forEach(room => {
+                    roomSelect.innerHTML += `<option value="${room}">${room}</option>`;
+                });
+            }
+            document.getElementById("spinButton").disabled = true;
+            document.getElementById("selectedStudent").style.opacity = 0; 
+        }
+
+        function updateStudents() {
+            const classSelect = document.getElementById("class").value;
+            const roomSelect = document.getElementById("room").value;
+            const studentsDiv = document.getElementById("students");
+
+            if (classSelect && roomSelect) {
+                const studentList = currentStudents[classSelect][roomSelect];
+                let table = '<table><tr><th>No.</th><th>Nama</th><th>kls</th></tr>';
+                
+      studentList.forEach((student, index) => {
+     table += `<tr><td>${index + 1}</td><td>${student.name}</td><td>${student.gender}</td></tr>`;
+         });
+       table += '</table>';
+     studentsDiv.innerHTML = table;
+     document.getElementById("spinButton").disabled = false;
+            } else {
+     document.getElementById("spinButton").disabled = true;
+                studentsDiv.innerHTML = '';
+            }
+        }
+        function spin() {
+    const classSelect = document.getElementById("class").value;
+    const roomSelect = document.getElementById("room").value;
+    const studentList = currentStudents[classSelect][roomSelect];
+    const selectedStudentDiv = document.getElementById("selectedStudent");
+    selectedStudentDiv.style.opacity = 1;
+    selectedStudentDiv.innerHTML = "<div class='loading-spinner'></div>";
+    setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * studentList.length);
+        const randomStudent = studentList[randomIndex];
+        selectedStudentDiv.innerHTML = `<span id="selectedName">${randomStudent.name}</span>`;
+        selectedStudentDiv.style.transform = "translateY(0)";
+        currentStudents[classSelect][roomSelect].splice(randomIndex, 1);
+        updateStudents();
+    }, 2000);
+}
+
+    //     Tiktok: m.hamzah_7
+    //     ig    : @wellhamz7
+    //     wa    : 085724385372
+    
+    </script>
+</body>
+</html>
